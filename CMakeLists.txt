@@ -3,4 +3,4 @@ project(Library)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Library main.cpp src/library.cpp src/interface.cpp)
+add_executable(Library main.cpp src/library.cpp)

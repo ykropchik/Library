@@ -11,26 +11,25 @@ bool Book::operator !=(const Book &book) {
 
 Reader::Reader (uint32_t id) {
     this->id = id;
-    this->books = {};
 }
 
 void Reader::addBook(Book *book) {
-    books.push_back(book);
+    readerBooks.push_back(book);
 }
 
-void Reader::returnBook(Book *book) {
-    for (int i = 0; i < books.size(); ++i) {
-        if (books[i] == book) {
-            books.erase(books.begin() + i);
+void Reader::removeBook(Book *book) {
+    for (int i = 0; i < readerBooks.size(); ++i) {
+        if (readerBooks[i] == book) {
+            readerBooks.erase(readerBooks.begin() + i);
             return;
         }
     }
 }
 
 void Reader::printRange() {
-    for (int i = 0; i < books.size(); ++i) {
-        std::cout << books[i]->author << " - "
-                  << books[i]->name << std::endl;
+    for (int i = 0; i < readerBooks.size(); ++i) {
+        std::cout << readerBooks[i]->author << " - "
+                  << readerBooks[i]->name << std::endl;
     }
 
     std::cout << std::endl;
@@ -38,17 +37,17 @@ void Reader::printRange() {
 
 
 Library::Library(const std::vector<const Book*> &books) {
-    this->books = books;
+    this->libBooks = books;
 }
 
 void Library::addBook(const Book *bookLink) {
-    books.push_back(bookLink);
+    libBooks.push_back(bookLink);
 }
 
 const Book* Library::findBook(const std::string &author, const std::string &name) {
-    for (int i = 0; i < books.size(); ++i) {
-        if ((books[i]->name == name) && (books[i]->author == author)) {
-            return books[i];
+    for (int i = 0; i < libBooks.size(); ++i) {
+        if ((libBooks[i]->name == name) && (libBooks[i]->author == author)) {
+            return libBooks[i];
         }
     }
 
@@ -58,15 +57,15 @@ const Book* Library::findBook(const std::string &author, const std::string &name
 std::vector<const Book*> Library::findBook(const std::string &desired, bool isName) {
     std::vector<const Book*> foundBook;
     if (isName){
-        for (int i = 0; i < books.size(); ++i) {
-            if (books[i]->name == desired) {
-                foundBook.push_back(books[i]);
+        for (int i = 0; i < libBooks.size(); ++i) {
+            if (libBooks[i]->name == desired) {
+                foundBook.push_back(libBooks[i]);
             }
         }
     } else {
-        for (int i = 0; i < books.size(); ++i) {
-            if (books[i]->author == desired) {
-                foundBook.push_back(books[i]);
+        for (int i = 0; i < libBooks.size(); ++i) {
+            if (libBooks[i]->author == desired) {
+                foundBook.push_back(libBooks[i]);
             }
         }
     }
@@ -76,19 +75,20 @@ std::vector<const Book*> Library::findBook(const std::string &desired, bool isNa
 
 void Library::takeBook(Reader reader, Book *book) {
     book->stock = false;
+    // This shit running, but the result not saved (if call in main() then no problem)
     reader.addBook(book);
 }
 
 void Library::returnBook(Reader reader, Book *book) {
     book->stock = true;
-    reader.returnBook(book);
+    reader.removeBook(book);
 }
 
 void Library::printRange(){
-    for (int i = 0; i < books.size(); ++i) {
-        std::cout << books[i]->author << " - "
-        << books[i]->name << " - "
-        << (books[i]->stock ? "(В наличии)" : "(Нет в наличии)") << std::endl;
+    for (int i = 0; i < libBooks.size(); ++i) {
+        std::cout << libBooks[i]->author << " - "
+                  << libBooks[i]->name << " - "
+                  << (libBooks[i]->stock ? "(В наличии)" : "(Нет в наличии)") << std::endl;
     }
 
     std::cout << std::endl;

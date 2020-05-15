@@ -15,18 +15,18 @@ struct Book {
 class Reader {
 private:
     uint32_t id;
-    std::vector<const Book*> books;
+    std::vector<const Book*> readerBooks;
 
 public:
-    Reader(uint32_t id);
+    explicit Reader(uint32_t id);
     void addBook(Book *book);
-    void returnBook(Book *book);
+    void removeBook(Book *book);
     void printRange();
 };
 
 class Library {
 private:
-    std::vector<const Book*> books;
+    std::vector<const Book*> libBooks;
 
 public:
     explicit Library (const std::vector<const Book*> &books);
