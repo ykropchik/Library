@@ -73,13 +73,12 @@ std::vector<const Book*> Library::findBook(const std::string &desired, bool isNa
     return foundBook;
 }
 
-void Library::takeBook(Reader reader, Book *book) {
+void Library::takeBook(Reader &reader, Book *book) {
     book->stock = false;
-    // This shit running, but the result not saved (if call in main() then no problem)
     reader.addBook(book);
 }
 
-void Library::returnBook(Reader reader, Book *book) {
+void Library::returnBook(Reader &reader, Book *book) {
     book->stock = true;
     reader.removeBook(book);
 }

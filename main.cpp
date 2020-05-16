@@ -19,5 +19,13 @@ int main() {
     library.takeBook(testAcc, &b2);
     library.takeBook(testAcc, &b7);
     testAcc.printRange();
+
+    library.returnBook(testAcc, &b1);
+    testAcc.printRange();
     library.printRange();
+
+    std::vector<const Book*> bookList = library.findBook("Стивен Кинг", false);
+    for (int i = 0; i < bookList.size(); ++i) {
+        std::cout << bookList[i]->name << std::endl;
+    }
 }

@@ -33,8 +33,8 @@ public:
     void addBook(const Book *bookLink);
     const Book* findBook(const std::string &author, const std::string &name);
     std::vector<const Book*> findBook(const std::string &desired, bool isName);
-    void takeBook(Reader reader, Book *book);
-    void returnBook(Reader reader, Book *book);
+    void takeBook(Reader &reader, Book *book);
+    void returnBook(Reader &reader, Book *book);
     void printRange();
 };
 
