@@ -15,7 +15,10 @@ int main() {
     library.printRange();
 
     Reader testAcc = Reader (1);
-    library.takeBook(testAcc, &b1);
+
+    Book *book = library.findBook((std::string) "Стивен Кинг", (std::string) "Оно");
+
+    library.takeBook(testAcc, book);
     library.takeBook(testAcc, &b2);
     library.takeBook(testAcc, &b7);
     testAcc.printRange();

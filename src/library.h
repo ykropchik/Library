@@ -15,7 +15,7 @@ struct Book {
 class Reader {
 private:
     uint32_t id;
-    std::vector<const Book*> readerBooks;
+    std::vector<Book*> readerBooks;
 
 public:
     explicit Reader(uint32_t id);
@@ -26,12 +26,12 @@ public:
 
 class Library {
 private:
-    std::vector<const Book*> libBooks;
+    std::vector<Book*> libBooks;
 
 public:
-    explicit Library (const std::vector<const Book*> &books);
-    void addBook(const Book *bookLink);
-    const Book* findBook(const std::string &author, const std::string &name);
+    explicit Library (const std::vector<Book*> &books);
+    void addBook(Book *bookLink);
+    Book* findBook(const std::string &author, const std::string &name);
     std::vector<const Book*> findBook(const std::string &desired, bool isName);
     void takeBook(Reader &reader, Book *book);
     void returnBook(Reader &reader, Book *book);

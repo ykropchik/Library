@@ -36,15 +36,15 @@ void Reader::printRange() {
 }
 
 
-Library::Library(const std::vector<const Book*> &books) {
+Library::Library(const std::vector<Book*> &books) {
     this->libBooks = books;
 }
 
-void Library::addBook(const Book *bookLink) {
+void Library::addBook(Book *bookLink) {
     libBooks.push_back(bookLink);
 }
 
-const Book* Library::findBook(const std::string &author, const std::string &name) {
+Book* Library::findBook(const std::string &author, const std::string &name) {
     for (int i = 0; i < libBooks.size(); ++i) {
         if ((libBooks[i]->name == name) && (libBooks[i]->author == author)) {
             return libBooks[i];
